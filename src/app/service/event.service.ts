@@ -72,7 +72,9 @@ export class EventService {
   }
 
   delete(id: number): void {
-    this.list.splice(id, 1);
+    this.list.forEach( (element, index) => {
+      if (element.id === id) this.list.splice(index, 1);
+    })
     this.getAll();
   }
 
