@@ -1,0 +1,90 @@
+<div class="row">
+  <div *ngIf="(event$ | async) as event" class="col-6 offset-3">
+
+    <form #eventForm="ngForm" (ngSubmit)="onSubmit(eventForm, event)">
+
+      <div class="form-group">
+        <label for="">Name</label>
+        <input 
+          name="name" type="text" class="form-control" 
+          [(ngModel)]="event.name" 
+          pattern=".{8,25}" 
+          required
+        >
+        <div [hidden]="eventForm.controls.name?.valid || eventForm.controls.name?.pristine" class="error-message">
+          A "name" mezőben minimum 8, maximum 25 karakter megadása kötelező.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Date</label>
+        <input 
+          name="date" type="text" class="form-control" 
+          [(ngModel)]="event.date" 
+          pattern="^([1-9]|1[0-2])\/([1-9]|[1-2][0-9]|3[0-1])\/\d{4}" 
+          required
+        >
+        <div [hidden]="eventForm.controls.date?.valid || eventForm.controls.date?.pristine" class="error-message">
+          A "date" mezőben az angol dátum formátum megadása kötelező (hh/nn/éééé)! Pl.: 02/20/2021
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Time</label>
+        <input 
+          name="time" type="text" class="form-control" 
+          [(ngModel)]="event.time" 
+          pattern="^([0][0-9]|[1][0-2])(am|pm)" 
+          required
+        >
+        <div [hidden]="eventForm.controls.time?.valid || eventForm.controls.time?.pristine" class="error-message">
+          A "Time" mezőben 12 órás módban kötelező megadni az időpontot! Pl.: 10am, vagy 08pm
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Country</label>
+        <input 
+          name="country" type="text" class="form-control" 
+          [(ngModel)]="event.location.country"
+          pattern="[A-Z]{5,25}" 
+          required
+        >
+        <div [hidden]="eventForm.controls.country?.valid || eventForm.controls.country?.pristine" class="error-message">
+          A "Country" mezőben minimum 5, maximum 25 karakter megadása kötelező! Csak az angol ABC nagybetűi használhatók.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="">City</label>
+        <input 
+          name="city" type="text" class="form-control" 
+          [(ngModel)]="event.location.city" 
+          pattern="^[A-Z].{4,24}"
+          required
+        >
+        <div [hidden]="eventForm.controls.city?.valid || eventForm.controls.city?.pristine" class="error-message">
+          A "City" mezőben minimum 5, maximum 25 karakter megadása kötelező! Bármilyen karakter használható, de kötelező nagy kezdőbetűvel kezdeni!
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Address</label>
+        <input 
+          name="address" type="text" class="form-control" 
+          [(ngModel)]="event.location.address" 
+          pattern=".{10,50}" 
+          required
+        >
+        <div [hidden]="eventForm.controls.address?.valid || eventForm.controls.address?.pristine" class="error-message">
+          Az "Address" mezőben minimum 10, maximum 50 karakter megadása kötelező! Bármilyen karakter használható.
+        </div>
+      </div>
+
+      <button [disabled]="eventForm.invalid" type="submit" class="btn btn-primary btn-block btn-lg">
+        <i class="fa fa-save"></i>
+      </button>
+
+    </form>
+  </div>
+</div>

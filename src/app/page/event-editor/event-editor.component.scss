@@ -1,0 +1,31 @@
+.form-group {
+  position: relative;
+}
+
+.error-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: .5rem 1rem;
+  border: 1px solid rgba(155, 4, 4, 1);
+  color: rgba(155, 4, 4, 1);
+  background-color: rgb(238, 213, 213);
+  font-style: italic;
+  font-size: 0.8em;
+  border-radius: .2rem;
+  animation: showerror .3s 1;
+  opacity: 1;
+  transform: translateY(-30px);
+}
+
+@keyframes showerror {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-30px);
+  }
+
+}
